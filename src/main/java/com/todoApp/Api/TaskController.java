@@ -36,8 +36,14 @@ public class TaskController {
 	
 	@GetMapping("/tasks")
 	public List<Task> getBooks(){
-		
-		return taskDal.getAll();
+		try {
+			return taskDal.getAll();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			final List<Task> task=null;
+			return task;
+		}
 	}
 	
 	@GetMapping("/getByUsername/{userName}")
