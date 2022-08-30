@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Built-By: dmnlf
 Build-Jdk: 11.0.1
-Implementation-Title: springCRUDExample
+Implementation-Title: TodoApp
 Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.springCRUDEx
+Implementation-Vendor-Id: com.todoApplication
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
- -starter-parent/springCRUDExample
+ -starter-parent/backend
 Created-By: Maven Integration for Eclipse
 
