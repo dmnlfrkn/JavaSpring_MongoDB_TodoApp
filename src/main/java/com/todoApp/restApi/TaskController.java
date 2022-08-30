@@ -22,14 +22,16 @@ public class TaskController {
 
 	 @Autowired
 	private TaskDal taskDal ;
-	
 		 
 	@PostMapping("/tasks")
 	public String addTask(@RequestBody Task task)
 	{
 		try {
+<<<<<<< HEAD
 			task.setId(taskDal.getSequenceNumber(Task.getSequenceName()));
 			task.setDate(LocalDateTime.now().toString() );
+=======
+>>>>>>> parent of b9415db (Mongodb Auto Incremented Id)
 			return taskDal.addTask(task);
 		}
 		
