@@ -28,8 +28,11 @@ public class TaskController {
 	{
 		try {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			task.setId(taskDal.getSequenceNumber(Task.getSequenceName()));
 			task.setDate(LocalDateTime.now().toString() );
+=======
+>>>>>>> parent of b9415db (Mongodb Auto Incremented Id)
 =======
 >>>>>>> parent of b9415db (Mongodb Auto Incremented Id)
 			return taskDal.addTask(task);
