@@ -47,10 +47,10 @@ public class TaskDal {
  }
  
  @Transactional
- public String deleteTask(Task task)
+ public String deleteTask(int id)
  {
 	 try {
-		  TaskRepository.delete(task); 
+		  TaskRepository.deleteById(id); 
 		  return "Task deleted";
 	 }
 	 catch(Exception e)

@@ -51,10 +51,10 @@ public class TaskController {
 	}
 	
 	@DeleteMapping("/tasks")
-	public String deleteTask(@RequestBody Task task)
+	public String deleteTask(@RequestBody int id)
 	{
 		try {
-			return taskDal.deleteTask(task);
+			return taskDal.deleteTask(id);
 		}
 		
 		catch(Exception e)
