@@ -21,11 +21,13 @@ public class TaskController {
 
 	 @Autowired
 	private TaskDal taskDal ;
+	
 		 
 	@PostMapping("/tasks")
 	public String addTask(@RequestBody Task task)
 	{
 		try {
+			task.setId(taskDal.getSequenceNumber(Task.getSequenceName()));
 			return taskDal.addTask(task);
 		}
 		

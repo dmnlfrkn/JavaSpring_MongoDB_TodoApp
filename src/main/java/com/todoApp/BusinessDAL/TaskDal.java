@@ -3,11 +3,17 @@ package com.todoApp.BusinessDAL;
 import java.util.List;
 
 
-
+import java.util.Objects;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.todoApp.Entities.DbSequence;
 import com.todoApp.Entities.Task;
 
 @Service
@@ -16,7 +22,23 @@ public class TaskDal {
  @Autowired
  private TaskRepository TaskRepository;
  
- @Transactional
+ @Autowired
+ private MongoOperations mongoOperations;
+ 
+ public int getSequenceNumber(String sequenceName) {
+	 
+	 //get squence_no
+	 Query query = new Query(Criteria.where("id").is(sequenceName));
+	 //update sequence_no
+	 Update update = new Update().inc("seq", 1);
+	 //modify in document
+	 DbSequence counter = mongoOperations
+			 .findAndModify(query, update, FindAndModifyOptions.options().returnNew(true).upsert(true), DbSequence.class);
+	 return !Objects.isNull(counter) ? counter.getSeq() : 1;
+	 
+}
+ 
+@Transactional
   public String addTask(Task task)
   {
 	 try {
@@ -51,7 +73,7 @@ public class TaskDal {
  {
 	 try {
 		  TaskRepository.deleteById(id); 
-		  return "Task deleted";
+		  return "Task deleted"+ id;
 	 }
 	 catch(Exception e)
 	 {
