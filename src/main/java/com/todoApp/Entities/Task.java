@@ -36,8 +36,10 @@ public class Task {
 	private String username ;
 	private String taskText;
 	private String state;
+	private String date;
 	
 	
+
 	public Task(int id, String username, String taskText,String state) {
 		
 		this.id = id;
@@ -77,7 +79,13 @@ public class Task {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 }
 
 

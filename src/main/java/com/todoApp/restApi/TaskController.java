@@ -1,5 +1,6 @@
 package com.todoApp.restApi;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class TaskController {
 	{
 		try {
 			task.setId(taskDal.getSequenceNumber(Task.getSequenceName()));
+			task.setDate(LocalDateTime.now().toString() );
 			return taskDal.addTask(task);
 		}
 		
