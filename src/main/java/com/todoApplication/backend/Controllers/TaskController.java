@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ public class TaskController {
 			if(task.getState().toLowerCase().equals("todo") ||
 			   task.getState().toLowerCase().equals("in progress") ||
 			   task.getState().toLowerCase().equals("done")) {
-				
+				task.setId(taskManager.getSequenceNumber(Task.getSequenceName()));
 				task.setDate(LocalDateTime.now().toString() );
 				taskManager.add(task);
 			}
@@ -50,9 +51,10 @@ public class TaskController {
 	@PutMapping("/tasks")
 	public void update(@RequestBody Task task) {
 		try {
-			if(task.getState().toLowerCase() =="todo" ||
-					   task.getState().toLowerCase() =="in progress" ||
-					   task.getState().toLowerCase() =="done") {
+			if(task.getState().toLowerCase().equals("todo") ||
+					   task.getState().toLowerCase().equals("in progress") ||
+					   task.getState().toLowerCase().equals("done")) {
+						task.setDate(LocalDateTime.now().toString());
 						taskManager.update(task);
 					}
 					else {
@@ -72,9 +74,9 @@ public class TaskController {
 		}
 	}
 	
-	/*
-	@GetMapping(@RequestBody "/tasks/{id}")
+	
+	@GetMapping("/tasks/{id}")
 	public Task getByTasBykId(@PathVariable int id){
-	return taskDal.getById(id);
-	}*/
+	return taskManager.getById(id);
+	}
 }

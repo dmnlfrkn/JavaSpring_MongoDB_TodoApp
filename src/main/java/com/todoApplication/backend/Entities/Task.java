@@ -1,6 +1,7 @@
 package com.todoApplication.backend.Entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +19,13 @@ import lombok.ToString;
 @ToString
 @Document(collection="tasks")
 public class Task {
+	
+	@Transient
+	private static final String SEQUENCE_NAME = "user_sequence";
+	
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
 	
 	
 	@Id
