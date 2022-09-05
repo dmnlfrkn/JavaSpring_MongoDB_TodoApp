@@ -32,17 +32,9 @@ public class TaskController {
 	public void addTask(@RequestBody Task task) {
 		
 		try {
-			if(task.getState().toLowerCase().equals("todo") ||
-			   task.getState().toLowerCase().equals("in progress") ||
-			   task.getState().toLowerCase().equals("done")) {
-				task.setId(taskManager.getSequenceNumber(Task.getSequenceName()));
-				task.setDate(LocalDateTime.now().toString() );
-				taskManager.add(task);
-			}
-			else {
-				System.out.println("hatalı state girildi...!!");
-			}
-			
+			task.setId(taskManager.getSequenceNumber(Task.getSequenceName()));
+			task.setDate(LocalDateTime.now().toString() );
+			taskManager.add(task);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -51,15 +43,8 @@ public class TaskController {
 	@PutMapping("/tasks")
 	public void update(@RequestBody Task task) {
 		try {
-			if(task.getState().toLowerCase().equals("todo") ||
-					   task.getState().toLowerCase().equals("in progress") ||
-					   task.getState().toLowerCase().equals("done")) {
-						task.setDate(LocalDateTime.now().toString());
-						taskManager.update(task);
-					}
-					else {
-						System.out.println("hatalı state girildi...!!");
-					}
+			task.setDate(LocalDateTime.now().toString());
+			taskManager.update(task);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
