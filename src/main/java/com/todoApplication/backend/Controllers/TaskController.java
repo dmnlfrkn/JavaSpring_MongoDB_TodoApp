@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.todoApplication.backend.Business.TaskManager;
 import com.todoApplication.backend.Entities.Task;
 
+
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:4200")
 public class TaskController {
 	
 	@Autowired
