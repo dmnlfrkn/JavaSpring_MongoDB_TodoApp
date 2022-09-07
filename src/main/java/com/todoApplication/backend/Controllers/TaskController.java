@@ -31,34 +31,53 @@ public class TaskController {
 	}
 	
 	@PostMapping("/tasks")
-	public void addTask(@RequestBody Task task) {
+	public Task addTask(@RequestBody Task task) {
 		
 		try {
+			
 			task.setId(taskManager.getSequenceNumber(Task.getSequenceName()));
 			task.setDate(LocalDateTime.now().toString() );
-			taskManager.add(task);
+			return taskManager.add(task);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 	
-	@PutMapping("/tasks")
-	public void update(@RequestBody Task task) {
+	@PutMapping("/tasks/{id}")
+	public Task update(@RequestBody Task task, @PathVariable int id) {
 		try {
-			task.setDate(LocalDateTime.now().toString());
-			taskManager.update(task);
+			
+			if(task.getId()==id) {
+				task.setDate(LocalDateTime.now().toString());
+				return taskManager.update(task);
+			}
+			else{
+				throw new Exception("Path id and Task id cannot be matched");    	
+			}
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			return null;
 		}
+		
 	}
 	
-	@DeleteMapping("/tasks")
-	public void delete(@RequestBody int id) {
+	@DeleteMapping("/tasks/{id}")
+	public Task delete(@RequestBody Task task, @PathVariable int id) {
 		try {
-			taskManager.delete(id);
+			if (task.getId() == id) {
+				taskManager.delete(id);
+				return task;
+			}
+			else {
+				throw new Exception("Path id and Task id cannot be matched");    
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 	
 	

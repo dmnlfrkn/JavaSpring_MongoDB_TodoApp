@@ -46,42 +46,43 @@ public class TaskManager implements ITaskService {
 	}
 
 	@Override
-	public void add(Task task) {
+	public Task add(Task task) {
 		try {
 			taskRepo.save(task);
-			System.out.println("Task Added with id : " + task.getId());
+			return task;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+		return null;
 		
 	}
 
 	@Override
-	public void update(Task task) {
+	public Task update(Task task) {
 		try {
 			 taskRepo.save(task);
-			 System.out.println("Task updated with id : " + task.getId());
+			 return task;
 		 }
 		 catch(Exception e)
 		 {
 			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 		 }
-		
+		return null;
 	}
 
 	@Override
-	public void delete(int id) {
+	public Task delete(int id) {
 		try {
 			  taskRepo.deleteById(id); 
-			  System.out.println("Task deleted"+ id);
+			  return (Task)this.taskRepo.findById(id);
 		 }
 		 catch(Exception e)
 		 {
 			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 		 }
+		return null;
 		
 	}
 
